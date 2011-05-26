@@ -1,6 +1,6 @@
 **Queryalize** lets you use Rails 3 to build queries just like with `ActiveRecord::QueryMethods`,
 except you can serialize the end result. This is useful for running queries that potentially
-return large result sets in the background use something like Resque or Delayed::Job.
+return large result sets in the background using something like Resque or Delayed::Job.
 
 Normally, using `ActiveRecord::QueryMethods`, you build queries like this:
 
