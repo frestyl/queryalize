@@ -64,7 +64,7 @@ It ends up looking something like this (if you're using Delayed::Job):
     # query  = query.joins("JOIN #{genres} ON #{genres}.music_id = #{genres}.id")
     # query  = query.where(["#{genres}.name = ?", 'electronica'])
     
-The `GenreWorker` method then looks something like this:
+The `GenreWorker` class looks something like this:
 
     class GenreWorker
     
