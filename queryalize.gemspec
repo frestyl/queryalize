@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-
+$:.push File.expand_path("../lib", __FILE__)
 require "queryalize/version"
 
 Gem::Specification.new do |s|
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = %q{
     Queryalize lets you use Rails 3 to build queries just like with ActiveRecord::QueryMethods,
     except you can serialize the end result. This is useful for running queries that potentially
-    return large result sets in the background use something like Resque or Delayed::Job.
+    return large result sets in the background using something like Resque or Delayed::Job.
   }
 
   s.rubyforge_project = "queryalize"
