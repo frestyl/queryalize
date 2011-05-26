@@ -47,7 +47,7 @@ the queue task.
 The solution is to serialize the query you've built, and then rebuild it in the queue task. 
 It ends up looking something like this (if you're using Delayed::Job):
     
-    query = Queryalize.new(Music).joins("JOIN #{Genre.table_name} ON #{Genre.table_name}.music_id = #{Music.table_name}.id").where("#{Genre.table_name}.name = 'electronica'")
+    query = Queryalize.new(Music).joins("JOIN #{Genre.table_name} ON #{Genre.table_name}.music_id = #{Music.table_name}.id").where(["#{Genre.table_name}.name = ?", 'electronica'])
     # see 1. below
     
     worker = GenreWorker.new({
