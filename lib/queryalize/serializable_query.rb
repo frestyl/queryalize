@@ -29,12 +29,10 @@ module Queryalize
     def self.from_yaml(yaml)
       deserialize(yaml, :yaml)
     end
-
-    # these methods allow it to use Marshal.dump and Marshal.load as well
+    
     class << self
       alias_method :_load, :from_json
     end
-    alias_method :_dump, :to_json
 
     def initialize(klass, scope = nil, chain_methods = { })
       @klass = klass
@@ -62,6 +60,10 @@ module Queryalize
     def to_yaml(opts = { })
       to_hash.to_yaml(opts)
     end
+    
+    def _dump(depth)
+      to_json
+    end
 
     def query_method?(name)
       ActiveRecord::QueryMethods.public_instance_methods.include?(name.to_s)
@@ -82,9 +84,17 @@ module Queryalize
         super(name, *args, &block)
       end
     end
+    
+    def inspect
+      if @chain_methods.empty?
+        @klass.name
+      else
+        @klass.name + "." + @chain_methods.collect { |method, args| "#{method}(#{args.collect(&:inspect).join(", ")})" }.join(".")
+      end
+    end
 
     private
-
+    
     def self.parse(data, mode)
       case mode
         when :json then data = JSON::parse(data)
