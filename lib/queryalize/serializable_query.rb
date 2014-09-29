@@ -66,7 +66,7 @@ module Queryalize
     end
 
     def query_method?(name)
-      ActiveRecord::QueryMethods.public_instance_methods.include?(name.to_s)
+      ActiveRecord::QueryMethods.public_instance_methods.include?(name.to_sym)
     end
 
     def chain(name, *args)
